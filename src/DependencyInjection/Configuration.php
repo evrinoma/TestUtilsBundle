@@ -1,23 +1,18 @@
 <?php
 
 
-namespace Evrinoma\TestBundle\DependencyInjection;
+namespace Evrinoma\TestUtilsBundle\DependencyInjection;
 
-use Evrinoma\TestBundle\EvrinomaTestBundle;
+use Evrinoma\TestUtilsBundle\EvrinomaTestUtilsBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * Class Configuration
- *
- * @package Evrinoma\TestBundle\DependencyInjection
- */
 class Configuration implements ConfigurationInterface
 {
 //region SECTION: Getters/Setters
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder(EvrinomaTestBundle::TEST_BUNDLE);
+        $treeBuilder = new TreeBuilder(EvrinomaTestUtilsBundle::TEST_BUNDLE);
         $rootNode    = $treeBuilder->getRootNode();
 
         return $treeBuilder;

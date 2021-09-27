@@ -1,20 +1,15 @@
 <?php
 
 
-namespace Evrinoma\TestBundle\DependencyInjection;
+namespace Evrinoma\TestUtilsBundle\DependencyInjection;
 
-use Evrinoma\TestBundle\EvrinomaTestBundle;
+use Evrinoma\TestUtilsBundle\EvrinomaTestUtilsBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class EvrinomaTestExtension
- *
- * @package Evrinoma\TestBundle\DependencyInjection
- */
-class EvrinomaTestExtension extends Extension
+class EvrinomaTestUtilsExtension extends Extension
 {
 //region SECTION: Fields
     private $container;
@@ -32,7 +27,7 @@ class EvrinomaTestExtension extends Extension
 //region SECTION: Getters/Setters
     public function getAlias()
     {
-        return EvrinomaTestBundle::TEST_BUNDLE;
+        return EvrinomaTestUtilsBundle::TEST_BUNDLE;
     }
 //endregion Getters/Setters
 }
