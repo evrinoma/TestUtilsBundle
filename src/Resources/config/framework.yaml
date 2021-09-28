@@ -1,6 +1,6 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-    secret: test
+    secret: '%env(APP_SECRET)%'
     test: true
     session:
         storage_id: session.storage.mock_file

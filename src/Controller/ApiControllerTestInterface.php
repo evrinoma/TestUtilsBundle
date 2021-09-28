@@ -24,5 +24,9 @@ interface ApiControllerTestInterface
     public function testGet(): void;
 
     public function testGetNotFound(): void;
+
+    public function testPostDuplicate(): void;
+
+    public function testPostUnprocessable(): void;
 //endregion Public
 }
