@@ -27,7 +27,7 @@ class EvrinomaTestUtilsExtension extends Extension
 //region SECTION: Getters/Setters
     public function getAlias()
     {
-        return EvrinomaTestUtilsBundle::TEST_BUNDLE;
+        return EvrinomaTestUtilsBundle::TEST_UTILS_BUNDLE;
     }
 //endregion Getters/Setters
 }

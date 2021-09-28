@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EvrinomaTestUtilsBundle extends Bundle
 {
-    public const TEST_BUNDLE = 'Test';
+    public const TEST_UTILS_BUNDLE = 'Test';
 
 //region SECTION: Getters/Setters
     public function getContainerExtension()
