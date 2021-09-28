@@ -3,6 +3,7 @@
 namespace Evrinoma\TestUtilsBundle\Kernel;
 
 use Psr\Log\NullLogger;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
@@ -15,6 +16,7 @@ abstract class AbstractApiKernel extends Kernel
 //region SECTION: Fields
     protected string $rootDir      = __DIR__;
     protected string $bundlePrefix = '';
+    private array    $bundleConfig = ['doctrine.yaml', 'fos_rest.yaml', 'framework.yaml', 'jms_serializer.yaml'];
     private ?string  $cacheDir     = null;
     private ?string  $logDir       = null;
 //endregion Fields
@@ -28,6 +30,8 @@ abstract class AbstractApiKernel extends Kernel
             $container->setParameter('kernel.root_dir', $this->getRootDir());
         }
     }
+
+    abstract protected function getBundleConfig(): array;
 //endregion Protected
 
 //region SECTION: Public
@@ -48,11 +52,19 @@ abstract class AbstractApiKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir().'/config/config.yml');
+        $this->load($loader, new FileLocator(__DIR__.'/../Resources/config'), $this->bundleConfig);
+        $this->load($loader, new FileLocator($this->getRootDir().'/Resources/config'), $this->getBundleConfig());
     }
 //endregion Public
 
 //region SECTION: Private
+    private function load(LoaderInterface $loader, FileLocator $locator, array $listName)
+    {
+        foreach ($listName as $fileConfig) {
+            $loader->load($locator->locate($fileConfig));
+        }
+    }
+
     private function getRootDir(): string
     {
         return $this->rootDir;

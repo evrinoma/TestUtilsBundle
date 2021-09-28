@@ -1,0 +1,6 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: test
+    test: true
+    session:
+        storage_id: session.storage.mock_file
