@@ -15,7 +15,6 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 abstract class AbstractWebCaseTest extends WebTestCase
 {
 //region SECTION: Fields
-    protected static string $kernelPath = __DIR__.'/Kernel.php';
     /**
      * @var AbstractBrowser
      */
@@ -27,16 +26,6 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Fields
 
 //region SECTION: Protected
-    /**
-     * {@inheritdoc}
-     */
-    protected static function createKernel(array $options = [])
-    {
-        require_once static::$kernelPath;
-
-        return new Kernel('test', true);
-    }
-
     protected function createAuthenticatedClient($token = null)
     {
 
