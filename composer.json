@@ -20,9 +20,6 @@
   "autoload": {
     "psr-4": {
       "Evrinoma\\TestUtilsBundle\\": "src/"
-    },
-    "exclude-from-classmap": [
-      "/Tests/"
-    ]
+    }
   }
 }
