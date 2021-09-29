@@ -23,9 +23,18 @@ abstract class AbstractWebCaseTest extends WebTestCase
      * @var EntityManagerInterface
      */
     protected EntityManagerInterface $entityManager;
+
+    protected array $default = [];
 //endregion Fields
 
 //region SECTION: Protected
+    protected function getDefault(array $extend): array
+    {
+        return array_merge($extend, unserialize(serialize($this->default)));
+    }
+
+    abstract protected function getDtoClass(): string;
+
     protected function createAuthenticatedClient($token = null)
     {
 
@@ -43,6 +52,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
     }
 //endregion Protected
 
+
 //region SECTION: Public
     public function tearDown(): void
     {
@@ -53,7 +63,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Public
 
 //region SECTION: Private
-    private function dropSchema(&$metadata=[]): SchemaTool
+    private function dropSchema(&$metadata = []): SchemaTool
     {
         $schemaTool = new SchemaTool($this->entityManager);
         $metadata   = $this->entityManager->getMetadataFactory()->getAllMetadata();
