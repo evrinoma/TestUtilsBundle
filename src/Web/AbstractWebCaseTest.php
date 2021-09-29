@@ -48,11 +48,28 @@ abstract class AbstractWebCaseTest extends WebTestCase
     {
         parent::tearDown();
 
-        $purger = new ORMPurger($this->entityManager);
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
-        $purger->purge();
+        $this->purgeSchema();
     }
 //endregion Public
+
+//region SECTION: Private
+    private function dropSchema(&$metadata=[]): SchemaTool
+    {
+        $schemaTool = new SchemaTool($this->entityManager);
+        $metadata   = $this->entityManager->getMetadataFactory()->getAllMetadata();
+
+        $schemaTool->dropSchema($metadata);
+
+        return $schemaTool;
+    }
+
+    private function purgeSchema()
+    {
+        $purger = new ORMPurger($this->entityManager);
+        $purger->setPurgeMode(ORMPurger::PURGE_MODE_DELETE);
+        $purger->purge();
+    }
+//endregion Private
 
 //region SECTION: Getters/Setters
     public function setUp(): void
@@ -63,12 +80,9 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
 
-        $schemaTool = new SchemaTool($this->entityManager);
-        $metadata   = $this->entityManager->getMetadataFactory()->getAllMetadata();
+        $schemaTool = $this->dropSchema($metadata);
 
-        $schemaTool->dropSchema($metadata);
         $schemaTool->createSchema($metadata);
     }
 //endregion Getters/Setters
-
 }
