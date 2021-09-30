@@ -16,9 +16,9 @@ abstract class AbstractWebCaseTest extends WebTestCase
 {
 //region SECTION: Fields
     /**
-     * @var AbstractBrowser
+     * @var AbstractBrowser|null
      */
-    protected $client;
+    protected ?AbstractBrowser $client = null;
     /**
      * @var EntityManagerInterface
      */
@@ -30,7 +30,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //region SECTION: Protected
     protected function getDefault(array $extend = []): array
     {
-        return array_merge($extend, unserialize(serialize($this->default)));
+        return array_merge(unserialize(serialize($this->default)), $extend);
     }
 
     abstract protected function getDtoClass(): string;
