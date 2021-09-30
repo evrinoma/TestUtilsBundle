@@ -12,15 +12,15 @@ trait ApiBrowserTestTrait
      */
     protected ?AbstractBrowser $client = null;
 
-    protected ?string $getUrl = null;
+    protected static ?string $getUrl = null;
 
-    protected ?string $criteriaUrl = null;
+    protected static ?string $criteriaUrl = null;
 
-    protected ?string $deleteUrl = null;
+    protected static ?string $deleteUrl = null;
 
-    protected ?string $putUrl = null;
+    protected static ?string $putUrl = null;
 
-    protected ?string $postUrl = null;
+    protected static ?string $postUrl = null;
 //endregion Fields
 
 
@@ -28,8 +28,8 @@ trait ApiBrowserTestTrait
     public function queryPost(array $query): array
     {
         $this->client->restart();
-        if ($this->postUrl) {
-            $this->client->request('POST', $this->postUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
+        if (static::$postUrl) {
+            $this->client->request('POST', static::$postUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
         } else {
             throw new \HttpUrlException();
         }
@@ -40,8 +40,8 @@ trait ApiBrowserTestTrait
     public function queryDelete(array $query): array
     {
         $this->client->restart();
-        if ($this->deleteUrl) {
-            $this->client->request('DELETE', $this->deleteUrl, $query);
+        if (static::$deleteUrl) {
+            $this->client->request('DELETE', static::$deleteUrl, $query);
         } else {
             throw new \HttpUrlException();
         }
@@ -52,8 +52,8 @@ trait ApiBrowserTestTrait
     public function queryPut(array $query): array
     {
         $this->client->restart();
-        if ($this->putUrl) {
-            $this->client->request('PUT', $this->putUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
+        if (static::$putUrl) {
+            $this->client->request('PUT', static::$putUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
         } else {
             throw new \HttpUrlException();
         }
@@ -64,8 +64,8 @@ trait ApiBrowserTestTrait
     public function queryGet(array $query): array
     {
         $this->client->restart();
-        if ($this->getUrl) {
-            $this->client->request('GET', $this->getUrl, $query);
+        if (static::$getUrl) {
+            $this->client->request('GET', static::$getUrl, $query);
         } else {
             throw new \HttpUrlException();
 
@@ -77,8 +77,8 @@ trait ApiBrowserTestTrait
     public function queryCriteria(array $query): array
     {
         $this->client->restart();
-        if ($this->criteriaUrl) {
-            $this->client->request('GET', $this->criteriaUrl, $query);
+        if (static::$criteriaUrl) {
+            $this->client->request('GET', static::$criteriaUrl, $query);
         } else {
             throw new \HttpUrlException();
         }

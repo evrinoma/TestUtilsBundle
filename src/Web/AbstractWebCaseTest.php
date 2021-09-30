@@ -35,7 +35,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
     abstract protected static function getDtoClass(): string;
 
-    abstract protected static function setDefault(): array;
+    abstract protected static function defaultData(): array;
 
     protected function createAuthenticatedClient($token = null)
     {
@@ -94,7 +94,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $schemaTool->createSchema($metadata);
 
-        $this->default = static::setDefault();
+        $this->default = static::defaultData();
     }
 //endregion Getters/Setters
 }
