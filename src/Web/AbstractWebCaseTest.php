@@ -28,7 +28,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Fields
 
 //region SECTION: Protected
-    protected function getDefault(array $extend): array
+    protected function getDefault(array $extend = []): array
     {
         return array_merge($extend, unserialize(serialize($this->default)));
     }
@@ -39,11 +39,9 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
     protected function createAuthenticatedClient($token = null)
     {
-
         if (null === $this->client) {
             $this->client = static::createClient();
         }
-
 
         return $this->client;
     }
