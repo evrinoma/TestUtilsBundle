@@ -19,7 +19,7 @@ trait ApiHelperTestTrait
 
     public function delete(string $id): array
     {
-        $query = ["class" => $this->getDtoClass(), "id" => $id,];
+        $query = ["class" => static::getDtoClass(), "id" => $id,];
 
         return $this->queryDelete($query);
     }
@@ -38,7 +38,7 @@ trait ApiHelperTestTrait
 //region SECTION: Getters/Setters
     public function get(int $id): array
     {
-        $query = ["class" => $this->getDtoClass(), "id" => $id,];
+        $query = ["class" => static::getDtoClass(), "id" => $id,];
 
         return $this->queryGet($query);
     }
