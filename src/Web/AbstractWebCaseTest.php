@@ -14,6 +14,12 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
  */
 abstract class AbstractWebCaseTest extends WebTestCase
 {
+    protected const API_GET      = '';
+    protected const API_CRITERIA = '';
+    protected const API_DELETE   = '';
+    protected const API_PUT      = '';
+    protected const API_POST     = '';
+
 //region SECTION: Fields
     /**
      * @var AbstractBrowser|null
@@ -36,6 +42,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
     abstract protected static function getDtoClass(): string;
 
     abstract protected static function defaultData(): array;
+
+    abstract protected function setUrl(): void;
 
     protected function createAuthenticatedClient($token = null)
     {
@@ -95,6 +103,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
         $schemaTool->createSchema($metadata);
 
         $this->default = static::defaultData();
+
+        $this->setUrl();
     }
 //endregion Getters/Setters
 }

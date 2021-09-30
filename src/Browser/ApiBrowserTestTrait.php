@@ -12,24 +12,24 @@ trait ApiBrowserTestTrait
      */
     protected ?AbstractBrowser $client = null;
 
-    protected static ?string $getUrl = null;
+    protected ?string $getUrl = null;
 
-    protected static ?string $criteriaUrl = null;
+    protected ?string $criteriaUrl = null;
 
-    protected static ?string $deleteUrl = null;
+    protected ?string $deleteUrl = null;
 
-    protected static ?string $putUrl = null;
+    protected ?string $putUrl = null;
 
-    protected static ?string $postUrl = null;
+    protected ?string $postUrl = null;
+
 //endregion Fields
-
 
 //region SECTION: Public
     public function queryPost(array $query): array
     {
         $this->client->restart();
-        if (static::$postUrl) {
-            $this->client->request('POST', static::$postUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
+        if ($this->postUrl) {
+            $this->client->request('POST', $this->postUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
         } else {
             throw new \HttpUrlException();
         }
@@ -40,8 +40,8 @@ trait ApiBrowserTestTrait
     public function queryDelete(array $query): array
     {
         $this->client->restart();
-        if (static::$deleteUrl) {
-            $this->client->request('DELETE', static::$deleteUrl, $query);
+        if ($this->deleteUrl) {
+            $this->client->request('DELETE', $this->deleteUrl, $query);
         } else {
             throw new \HttpUrlException();
         }
@@ -52,8 +52,8 @@ trait ApiBrowserTestTrait
     public function queryPut(array $query): array
     {
         $this->client->restart();
-        if (static::$putUrl) {
-            $this->client->request('PUT', static::$putUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
+        if ($this->putUrl) {
+            $this->client->request('PUT', $this->putUrl, [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
         } else {
             throw new \HttpUrlException();
         }
@@ -64,8 +64,8 @@ trait ApiBrowserTestTrait
     public function queryGet(array $query): array
     {
         $this->client->restart();
-        if (static::$getUrl) {
-            $this->client->request('GET', static::$getUrl, $query);
+        if ($this->getUrl) {
+            $this->client->request('GET', $this->getUrl, $query);
         } else {
             throw new \HttpUrlException();
 
@@ -77,20 +77,29 @@ trait ApiBrowserTestTrait
     public function queryCriteria(array $query): array
     {
         $this->client->restart();
-        if (static::$criteriaUrl) {
-            $this->client->request('GET', static::$criteriaUrl, $query);
+        if ($this->criteriaUrl) {
+            $this->client->request('GET', $this->criteriaUrl, $query);
         } else {
             throw new \HttpUrlException();
         }
 
         return $this->toResponse();
     }
-//endregion Public
 
-//region SECTION: Getters/Setters
     public function toResponse(): array
     {
         return json_decode($this->client->getResponse()->getContent(), true);
+    }
+//endregion Public
+
+//region SECTION: Getters/Setters
+    public function setUrl(): void
+    {
+        $this->postUrl     = static::API_POST;
+        $this->getUrl      = static::API_GET;
+        $this->putUrl      = static::API_PUT;
+        $this->deleteUrl   = static::API_DELETE;
+        $this->criteriaUrl = static::API_CRITERIA;
     }
 //endregion Getters/Setters
 }
