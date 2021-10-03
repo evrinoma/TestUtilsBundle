@@ -77,10 +77,6 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $fixtures = $loader->getFixtures($this->getFixtures());
         $executor->execute($fixtures);
-//        foreach ($this->getFixtures() as $group) {
-//            $fixtures = $loader->getFixtures($group);
-//            $executor->execute($fixtures);
-//        }
     }
 
     private function dropSchema(&$metadata = []): SchemaTool
