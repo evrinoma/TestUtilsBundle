@@ -44,6 +44,7 @@ abstract class AbstractApiKernel extends Kernel
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),

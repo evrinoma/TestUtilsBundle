@@ -3,9 +3,12 @@
 namespace Evrinoma\TestUtilsBundle\Web;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
@@ -14,13 +17,12 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
  */
 abstract class AbstractWebCaseTest extends WebTestCase
 {
+//region SECTION: Fields
     protected const API_GET      = '';
     protected const API_CRITERIA = '';
     protected const API_DELETE   = '';
     protected const API_PUT      = '';
     protected const API_POST     = '';
-
-//region SECTION: Fields
     /**
      * @var AbstractBrowser|null
      */
@@ -55,13 +57,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         return $this->client;
     }
-
-    private function loadFixture(Fixture $fixture): void
-    {
-        $fixture->load($this->entityManager);
-    }
 //endregion Protected
-
 
 //region SECTION: Public
     public function tearDown(): void
@@ -73,6 +69,20 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Public
 
 //region SECTION: Private
+    private function loadFixtures(ContainerAwareLoader $loader): void
+    {
+
+        $purger = new ORMPurger($this->entityManager);
+        $executor = new ORMExecutor($this->entityManager, $purger);
+
+        $fixtures = $loader->getFixtures($this->getFixtures());
+        $executor->execute($fixtures);
+//        foreach ($this->getFixtures() as $group) {
+//            $fixtures = $loader->getFixtures($group);
+//            $executor->execute($fixtures);
+//        }
+    }
+
     private function dropSchema(&$metadata = []): SchemaTool
     {
         $schemaTool = new SchemaTool($this->entityManager);
@@ -96,9 +106,9 @@ abstract class AbstractWebCaseTest extends WebTestCase
     {
         $this->client = $this->createAuthenticatedClient();
 
-        $kernel = self::bootKernel();
+        $container = $this->getContainer();
 
-        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
+        $this->entityManager = $container->get('doctrine')->getManager();
 
         $schemaTool = $this->dropSchema($metadata);
 
@@ -108,10 +118,9 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $this->setUrl();
 
-        foreach ($this->getFixtures() as $fixtureClass)
-        {
-            $this->loadFixture($fixtureClass);
-        }
+        $loader = $container->get('doctrine.fixtures.loader');
+
+        $this->loadFixtures($loader);
     }
 //endregion Getters/Setters
 }
