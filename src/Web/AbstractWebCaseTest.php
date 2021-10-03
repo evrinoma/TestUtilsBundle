@@ -45,6 +45,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
     abstract protected function setUrl(): void;
 
+    abstract protected function getFixtures(): array;
+
     protected function createAuthenticatedClient($token = null)
     {
         if (null === $this->client) {
@@ -54,7 +56,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
         return $this->client;
     }
 
-    protected function load(Fixture $fixture): void
+    private function loadFixture(Fixture $fixture): void
     {
         $fixture->load($this->entityManager);
     }
@@ -90,7 +92,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Private
 
 //region SECTION: Getters/Setters
-    public function setUp(): void
+    final public function setUp(): void
     {
         $this->client = $this->createAuthenticatedClient();
 
@@ -105,6 +107,11 @@ abstract class AbstractWebCaseTest extends WebTestCase
         $this->default = static::defaultData();
 
         $this->setUrl();
+
+        foreach ($this->getFixtures() as $fixtureClass)
+        {
+            $this->loadFixture($fixtureClass);
+        }
     }
 //endregion Getters/Setters
 }
