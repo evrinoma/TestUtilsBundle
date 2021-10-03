@@ -2,8 +2,6 @@
 
 namespace Evrinoma\TestUtilsBundle\Web;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,12 +69,15 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //region SECTION: Private
     private function loadFixtures(ContainerAwareLoader $loader): void
     {
-
-        $purger = new ORMPurger($this->entityManager);
-        $executor = new ORMExecutor($this->entityManager, $purger);
-
-        $fixtures = $loader->getFixtures($this->getFixtures());
-        $executor->execute($fixtures);
+        $groups = $this->getFixtures();
+        if (count($groups)) {
+            $fixtures = $loader->getFixtures($this->getFixtures());
+            if (count($fixtures)) {
+                $purger   = new ORMPurger($this->entityManager);
+                $executor = new ORMExecutor($this->entityManager, $purger);
+                $executor->execute($fixtures);
+            }
+        }
     }
 
     private function dropSchema(&$metadata = []): SchemaTool
