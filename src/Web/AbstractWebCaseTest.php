@@ -71,7 +71,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
     {
         $groups = $this->getFixtures();
         if (count($groups)) {
-            $fixtures = $loader->getFixtures($this->getFixtures());
+            $fixtures = $loader->getFixtures($groups);
             if (count($fixtures)) {
                 $purger   = new ORMPurger($this->entityManager);
                 $executor = new ORMExecutor($this->entityManager, $purger);
