@@ -21,6 +21,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
     protected const API_DELETE   = '';
     protected const API_PUT      = '';
     protected const API_POST     = '';
+    protected static array $default = [];
     /**
      * @var AbstractBrowser|null
      */
@@ -29,14 +30,12 @@ abstract class AbstractWebCaseTest extends WebTestCase
      * @var EntityManagerInterface
      */
     protected EntityManagerInterface $entityManager;
-
-    protected array $default = [];
 //endregion Fields
 
 //region SECTION: Protected
-    protected function getDefault(array $extend = []): array
+    public static function getDefault(array $extend = []): array
     {
-        return array_merge(unserialize(serialize($this->default)), $extend);
+        return array_merge(unserialize(serialize(static::$default)), $extend);
     }
 
     abstract protected static function getDtoClass(): string;
@@ -45,7 +44,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
     abstract protected function setUrl(): void;
 
-    abstract protected function getFixtures(): array;
+    abstract public static function getFixtures(): array;
 
     protected function createAuthenticatedClient($token = null)
     {
@@ -69,7 +68,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //region SECTION: Private
     private function loadFixtures(ContainerAwareLoader $loader): void
     {
-        $groups = $this->getFixtures();
+        $groups = static::getFixtures();
         if (count($groups)) {
             $fixtures = $loader->getFixtures($groups);
             if (count($fixtures)) {
@@ -111,7 +110,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $schemaTool->createSchema($metadata);
 
-        $this->default = static::defaultData();
+        static::$default = static::defaultData();
 
         $this->setUrl();
 
