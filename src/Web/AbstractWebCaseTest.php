@@ -57,7 +57,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Protected
 
 //region SECTION: Public
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
