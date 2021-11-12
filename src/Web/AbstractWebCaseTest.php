@@ -98,7 +98,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Private
 
 //region SECTION: Getters/Setters
-    final public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = $this->createAuthenticatedClient();
 
