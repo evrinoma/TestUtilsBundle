@@ -2,7 +2,7 @@
 
 namespace Evrinoma\TestUtilsBundle\Helper;
 
-interface ApiHelperTestInterface
+interface ApiMethodTestInterface
 {
 //region SECTION: Public
     public function postWrong(): array;

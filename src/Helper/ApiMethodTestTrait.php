@@ -2,14 +2,12 @@
 
 namespace Evrinoma\TestUtilsBundle\Helper;
 
-trait ApiHelperTestTrait
+trait ApiMethodTestTrait
 {
 //region SECTION: Public
     public function postWrong(): array
     {
-        $query = [];
-
-        return $this->post($query);
+        return $this->post([]);
     }
 
     public function post(array $query): array
@@ -19,9 +17,7 @@ trait ApiHelperTestTrait
 
     public function delete(string $id): array
     {
-        $query = ["class" => static::getDtoClass(), "id" => $id,];
-
-        return $this->queryDelete($query);
+        return $this->queryDelete(["class" => static::getDtoClass(), "id" => $id,]);
     }
 
     public function criteria(array $query): array
@@ -38,9 +34,7 @@ trait ApiHelperTestTrait
 //region SECTION: Getters/Setters
     public function get(int $id): array
     {
-        $query = ["class" => static::getDtoClass(), "id" => $id,];
-
-        return $this->queryGet($query);
+        return $this->queryGet(["class" => static::getDtoClass(), "id" => $id,]);
     }
 //endregion Getters/Setters
 }
