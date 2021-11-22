@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
+use Evrinoma\TestUtilsBundle\Helper\AbstractSymfony;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
@@ -33,35 +34,61 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Fields
 
 //region SECTION: Protected
-    public static function getDefault(array $extend = []): array
-    {
-        return array_merge(unserialize(serialize(static::$default)), $extend);
-    }
-
     abstract protected static function getDtoClass(): string;
 
     abstract protected static function defaultData(): array;
 
     abstract protected function setUrl(): void;
 
-    abstract public static function getFixtures(): array;
-
-    protected function createAuthenticatedClient($token = null)
+    protected function createAuthenticatedClient()
     {
-        if (null === $this->client) {
+        if ($this->client){
+            return $this->client;
+        }
+
+        if (static::$booted) {
+            $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;;
+            $this->client = $container->get('test.client');
+        } else {
             $this->client = static::createClient();
         }
 
         return $this->client;
     }
-//endregion Protected
 
-//region SECTION: Public
     protected function tearDown(): void
     {
         parent::tearDown();
 
         $this->purgeSchema();
+    }
+
+    protected function setUp(): void
+    {
+        $this->client = $this->createAuthenticatedClient();
+
+        $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;;
+
+        $this->entityManager = $container->get('doctrine')->getManager();
+
+        $schemaTool = $this->dropSchema($metadata);
+
+        $schemaTool->createSchema($metadata);
+
+        static::$default = static::defaultData();
+
+        $this->setUrl();
+
+        $loader = $container->get('doctrine.fixtures.loader');
+
+        $this->loadFixtures($loader);
+    }
+//endregion Protected
+
+//region SECTION: Public
+    public static function merge(array $base = [], array $extend = []): array
+    {
+        return array_merge(unserialize(serialize($base)), $extend);
     }
 //endregion Public
 
@@ -98,25 +125,11 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Private
 
 //region SECTION: Getters/Setters
-    protected function setUp(): void
+    public static function getDefault(array $extend = []): array
     {
-        $this->client = $this->createAuthenticatedClient();
-
-        $container = $this->getContainer();
-
-        $this->entityManager = $container->get('doctrine')->getManager();
-
-        $schemaTool = $this->dropSchema($metadata);
-
-        $schemaTool->createSchema($metadata);
-
-        static::$default = static::defaultData();
-
-        $this->setUrl();
-
-        $loader = $container->get('doctrine.fixtures.loader');
-
-        $this->loadFixtures($loader);
+        return static::merge(static::$default, $extend);
     }
+
+    abstract public static function getFixtures(): array;
 //endregion Getters/Setters
 }

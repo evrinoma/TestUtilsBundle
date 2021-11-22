@@ -17,6 +17,6 @@ interface ApiMethodTestInterface
 //endregion Public
 
 //region SECTION: Getters/Setters
-    public function get(int $id): array;
+    public function get(string $id): array;
 //endregion Getters/Setters
 }

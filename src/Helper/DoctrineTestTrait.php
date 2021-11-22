@@ -4,7 +4,7 @@ namespace Evrinoma\TestUtilsBundle\Helper;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-trait DoctrineHelperTestTrait
+trait DoctrineTestTrait
 {
 //region SECTION: Fields
     private EntityManagerInterface $em;
@@ -17,9 +17,9 @@ trait DoctrineHelperTestTrait
 
 //region SECTION: Protected
 
-    protected function setEntityManager()
+    protected function setEntityManager($container)
     {
-        $this->em = static::$container->get('doctrine.orm.default_entity_manager');
+        $this->em = $container->get('doctrine.orm.default_entity_manager');
     }
 
     protected function getEntityManager(): EntityManagerInterface
