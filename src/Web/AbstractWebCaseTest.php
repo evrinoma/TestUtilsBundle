@@ -12,17 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
 /**
- * AbstractWebCaseTest.
+ * AbstractCaseTest.
  */
 abstract class AbstractWebCaseTest extends WebTestCase
 {
 //region SECTION: Fields
-    protected const API_GET      = '';
-    protected const API_CRITERIA = '';
-    protected const API_DELETE   = '';
-    protected const API_PUT      = '';
-    protected const API_POST     = '';
-    protected static array $default = [];
     /**
      * @var AbstractBrowser|null
      */
@@ -34,12 +28,6 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Fields
 
 //region SECTION: Protected
-    abstract protected static function getDtoClass(): string;
-
-    abstract protected static function defaultData(): array;
-
-    abstract protected function setUrl(): void;
-
     protected function createAuthenticatedClient()
     {
         if ($this->client){
@@ -75,22 +63,11 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $schemaTool->createSchema($metadata);
 
-        static::$default = static::defaultData();
-
-        $this->setUrl();
-
         $loader = $container->get('doctrine.fixtures.loader');
 
         $this->loadFixtures($loader);
     }
 //endregion Protected
-
-//region SECTION: Public
-    public static function merge(array $base = [], array $extend = []): array
-    {
-        return array_merge(unserialize(serialize($base)), $extend);
-    }
-//endregion Public
 
 //region SECTION: Private
     private function loadFixtures(ContainerAwareLoader $loader): void
@@ -125,11 +102,6 @@ abstract class AbstractWebCaseTest extends WebTestCase
 //endregion Private
 
 //region SECTION: Getters/Setters
-    public static function getDefault(array $extend = []): array
-    {
-        return static::merge(static::$default, $extend);
-    }
-
     abstract public static function getFixtures(): array;
 //endregion Getters/Setters
 }
