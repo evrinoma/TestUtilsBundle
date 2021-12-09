@@ -21,8 +21,14 @@ trait ApiBrowserTestTrait
     protected ?string $putUrl = null;
 
     protected ?string $postUrl = null;
-
 //endregion Fields
+
+//region SECTION: Protected
+    /**
+     * @param AbstractBrowser|null $client
+     */
+    abstract public function setClient(?AbstractBrowser $client): void;
+//endregion Protected
 
 //region SECTION: Public
     public function queryPost(array $query): array
