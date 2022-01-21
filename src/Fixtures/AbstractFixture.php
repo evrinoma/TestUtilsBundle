@@ -30,5 +30,5 @@ abstract class AbstractFixture extends Fixture
         $manager->flush();
     }
 
-    abstract protected function create(ObjectManager $manager);
+    abstract protected function create(ObjectManager $manager):self;
 }
