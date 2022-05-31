@@ -17,5 +17,10 @@ abstract class AbstractId extends AbstractValueObject implements ValueObjectTest
     {
         return static::$wrong ?? '100000';
     }
+
+    public static function default(): string
+    {
+        return static::$default ?? '88';
+    }
 //endregion Public
 }
