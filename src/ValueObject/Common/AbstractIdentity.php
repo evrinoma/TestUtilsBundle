@@ -17,5 +17,10 @@ abstract class AbstractIdentity extends AbstractValueObject implements ValueObje
     {
         return strrev(static::value());
     }
+
+    public static function default(): string
+    {
+        return static::$default ?? '';
+    }
 //endregion Public
 }

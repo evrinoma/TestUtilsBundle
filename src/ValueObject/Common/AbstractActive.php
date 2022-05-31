@@ -15,7 +15,7 @@ abstract class AbstractActive extends AbstractValueObject implements ValueObject
 //region SECTION: Public
     public static function default(): string
     {
-        return static::$default ?? ActiveModel::BLOCKED;
+        return static::$default ?? '';
     }
 
     public static function value(): string

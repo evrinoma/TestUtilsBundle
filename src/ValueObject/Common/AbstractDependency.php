@@ -17,5 +17,10 @@ abstract class AbstractDependency extends AbstractValueObject implements ValueOb
     {
         return strrev(static::value());
     }
+
+    public static function default(): string
+    {
+        return static::$default ?? '';
+    }
 //endregion Public
 }

@@ -17,5 +17,10 @@ abstract class AbstractName extends AbstractValueObject  implements ValueObjectT
     {
         return strrev(static::value());
     }
+
+    public static function default(): string
+    {
+        return static::$default ?? '';
+    }
 //endregion Public
 }
