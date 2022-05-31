@@ -18,6 +18,21 @@ abstract class AbstractActive extends AbstractValueObject implements ValueObject
         return static::$value ?? ActiveModel::ACTIVE;
     }
 
+    public static function delete(): string
+    {
+        return ActiveModel::DELETED;
+    }
+
+    public static function moderate(): string
+    {
+        return ActiveModel::MODERATED;
+    }
+
+    public static function block(): string
+    {
+        return ActiveModel::BLOCKED;
+    }
+
     public static function wrong(): string
     {
         return static::ACTIVE_MODEL_WRONG;
