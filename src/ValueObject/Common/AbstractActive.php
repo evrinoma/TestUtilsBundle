@@ -9,7 +9,7 @@ use Evrinoma\UtilsBundle\Model\ActiveModel;
 abstract class AbstractActive extends AbstractValueObject implements ValueObjectTest
 {
 //region SECTION: Fields
-    private const ACTIVE_MODEL_WRONG = 'w';
+    protected const ACTIVE_MODEL_WRONG = 'w';
 //endregion Fields
 
 //region SECTION: Public
