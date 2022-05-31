@@ -5,6 +5,8 @@ namespace Evrinoma\TestUtilsBundle\ValueObject;
 interface ValueObjectTest
 {
 //region SECTION: Public
+    public static function default(): string;
+
     public static function value(): string;
 
     public static function wrong(): string;

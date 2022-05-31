@@ -7,6 +7,7 @@ abstract class AbstractValueObject
 //region SECTION: Fields
     protected static string $value;
     protected static string $wrong;
+    protected static string $default;
 //endregion Fields
 
 //region SECTION: Public
@@ -28,6 +29,11 @@ abstract class AbstractValueObject
     public static function nullable()
     {
         return null;
+    }
+
+    public static function default(): ?string
+    {
+        return static::$default;
     }
 //endregion Public
 }
