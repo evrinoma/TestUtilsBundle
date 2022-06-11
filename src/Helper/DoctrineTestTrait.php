@@ -6,16 +6,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 trait DoctrineTestTrait
 {
-//region SECTION: Fields
+
     private EntityManagerInterface $em;
 
     /**
      * Мусор, образующийся при выполнении очередного теста, который надо удалить перед выполнением следующего теста
      */
     private array $garbage = [];
-//endregion Fields
 
-//region SECTION: Protected
 
     protected function setEntityManager($container)
     {
@@ -67,9 +65,8 @@ trait DoctrineTestTrait
     }
 
     abstract protected function getEntityClass(): string;
-//endregion Protected
 
-//region SECTION: Private
+
     /**
      * @param string $class
      * @param int    $id
@@ -82,5 +79,5 @@ trait DoctrineTestTrait
         $this->em->remove($obj);
         $this->em->flush();
     }
-//endregion Private
+
 }

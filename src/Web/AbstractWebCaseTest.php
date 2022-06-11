@@ -16,7 +16,7 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
  */
 abstract class AbstractWebCaseTest extends WebTestCase
 {
-//region SECTION: Fields
+
     /**
      * @var AbstractBrowser|null
      */
@@ -25,9 +25,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
      * @var EntityManagerInterface
      */
     protected EntityManagerInterface $entityManager;
-//endregion Fields
 
-//region SECTION: Protected
+
     protected function createAuthenticatedClient()
     {
         if ($this->client){
@@ -67,9 +66,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
 
         $this->loadFixtures($loader);
     }
-//endregion Protected
 
-//region SECTION: Private
+
     private function loadFixtures(ContainerAwareLoader $loader): void
     {
         $groups = static::getFixtures();
@@ -99,9 +97,8 @@ abstract class AbstractWebCaseTest extends WebTestCase
         $purger->setPurgeMode(ORMPurger::PURGE_MODE_DELETE);
         $purger->purge();
     }
-//endregion Private
 
-//region SECTION: Getters/Setters
+
     abstract public static function getFixtures(): array;
-//endregion Getters/Setters
+
 }

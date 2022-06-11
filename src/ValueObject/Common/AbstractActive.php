@@ -8,11 +8,10 @@ use Evrinoma\UtilsBundle\Model\ActiveModel;
 
 abstract class AbstractActive extends AbstractValueObject implements ValueObjectTest
 {
-//region SECTION: Fields
-    protected const ACTIVE_MODEL_WRONG = 'w';
-//endregion Fields
 
-//region SECTION: Public
+    protected const ACTIVE_MODEL_WRONG = 'w';
+
+
     public static function default(): string
     {
         return static::$default ?? '';
@@ -42,5 +41,4 @@ abstract class AbstractActive extends AbstractValueObject implements ValueObject
     {
         return static::ACTIVE_MODEL_WRONG;
     }
-//endregion Public
 }

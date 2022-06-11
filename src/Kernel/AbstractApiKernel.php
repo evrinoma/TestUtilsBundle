@@ -13,15 +13,14 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 abstract class AbstractApiKernel extends Kernel
 {
-//region SECTION: Fields
+
     protected string $rootDir      = __DIR__;
     protected string $bundlePrefix = '';
     private array    $bundleConfig = ['doctrine.yaml', 'fos_rest.yaml', 'framework.yaml', 'jms_serializer.yaml'];
     private ?string  $cacheDir     = null;
     private ?string  $logDir       = null;
-//endregion Fields
 
-//region SECTION: Protected
+
     protected function build(ContainerBuilder $container)
     {
         $container->register('logger', NullLogger::class);
@@ -32,9 +31,8 @@ abstract class AbstractApiKernel extends Kernel
     }
 
     abstract protected function getBundleConfig(): array;
-//endregion Protected
 
-//region SECTION: Public
+
     /**
      * {@inheritdoc}
      */
@@ -56,9 +54,8 @@ abstract class AbstractApiKernel extends Kernel
         $this->load($loader, new FileLocator(__DIR__.'/../Resources/config'), $this->bundleConfig);
         $this->load($loader, new FileLocator($this->getRootDir().'/Resources/config'), $this->getBundleConfig());
     }
-//endregion Public
 
-//region SECTION: Private
+
     private function load(LoaderInterface $loader, FileLocator $locator, array $listName)
     {
         foreach ($listName as $fileConfig) {
@@ -75,9 +72,8 @@ abstract class AbstractApiKernel extends Kernel
     {
         return $this->bundlePrefix;
     }
-//endregion Private
 
-//region SECTION: Getters/Setters
+
     /**
      * {@inheritdoc}
      */
@@ -101,5 +97,5 @@ abstract class AbstractApiKernel extends Kernel
 
         return $this->logDir;
     }
-//endregion Getters/Setters
+
 }

@@ -6,7 +6,7 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 
 trait ApiBrowserTestTrait
 {
-//region SECTION: Fields
+
     /**
      * @var AbstractBrowser|null
      */
@@ -21,16 +21,14 @@ trait ApiBrowserTestTrait
     protected ?string $putUrl = null;
 
     protected ?string $postUrl = null;
-//endregion Fields
 
-//region SECTION: Protected
+
     /**
      * @param AbstractBrowser|null $client
      */
     abstract public function setClient(?AbstractBrowser $client): void;
-//endregion Protected
 
-//region SECTION: Public
+
     public function queryPost(array $query): array
     {
         $this->client->restart();
@@ -96,9 +94,8 @@ trait ApiBrowserTestTrait
     {
         return json_decode($this->client->getResponse()->getContent(), true);
     }
-//endregion Public
 
-//region SECTION: Getters/Setters
+
     public function setUrl(): void
     {
         $this->postUrl     = static::API_POST;
@@ -107,5 +104,5 @@ trait ApiBrowserTestTrait
         $this->deleteUrl   = static::API_DELETE;
         $this->criteriaUrl = static::API_CRITERIA;
     }
-//endregion Getters/Setters
+
 }

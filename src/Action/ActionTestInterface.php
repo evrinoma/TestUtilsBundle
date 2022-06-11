@@ -8,7 +8,7 @@ use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestInterface;
 
 interface ActionTestInterface extends ApiBrowserTestInterface, InitApiBrowserTestInterface, ApiMethodTestInterface
 {
-//region SECTION:Public
+
     public function actionPost(): void;
 
     public function actionPostDuplicate(): void;
@@ -34,5 +34,4 @@ interface ActionTestInterface extends ApiBrowserTestInterface, InitApiBrowserTes
     public function actionGet(): void;
 
     public function actionGetNotFound(): void;
-//endregion Public
 }

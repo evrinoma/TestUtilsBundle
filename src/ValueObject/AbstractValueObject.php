@@ -4,13 +4,12 @@ namespace Evrinoma\TestUtilsBundle\ValueObject;
 
 abstract class AbstractValueObject
 {
-//region SECTION: Fields
+
     protected static string $value;
     protected static string $wrong;
     protected static string $default;
-//endregion Fields
 
-//region SECTION: Public
+
     public static function value(): ?string
     {
         return static::$value;
@@ -35,5 +34,4 @@ abstract class AbstractValueObject
     {
         return static::$default;
     }
-//endregion Public
 }

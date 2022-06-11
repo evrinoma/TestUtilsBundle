@@ -7,7 +7,7 @@ use Evrinoma\TestUtilsBundle\ValueObject\ValueObjectTest;
 
 abstract class AbstractId extends AbstractValueObject implements ValueObjectTest
 {
-//region SECTION: Public
+
     public static function value(): string
     {
         return static::$value ?? '1';
@@ -22,5 +22,4 @@ abstract class AbstractId extends AbstractValueObject implements ValueObjectTest
     {
         return static::$default ?? '';
     }
-//endregion Public
 }

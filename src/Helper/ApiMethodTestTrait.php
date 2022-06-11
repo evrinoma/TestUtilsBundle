@@ -4,7 +4,7 @@ namespace Evrinoma\TestUtilsBundle\Helper;
 
 trait ApiMethodTestTrait
 {
-//region SECTION: Public
+
     public function postWrong(): array
     {
         return $this->post([]);
@@ -29,12 +29,11 @@ trait ApiMethodTestTrait
     {
         return $this->queryPut($query);
     }
-//endregion Public
 
-//region SECTION: Getters/Setters
+
     public function get(string $id): array
     {
         return $this->queryGet(["class" => static::getDtoClass(), "id" => $id,]);
     }
-//endregion Getters/Setters
+
 }

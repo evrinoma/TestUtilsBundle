@@ -10,7 +10,7 @@ class EvrinomaTestUtilsBundle extends Bundle
 {
     public const TEST_UTILS_BUNDLE = 'Test';
 
-//region SECTION: Getters/Setters
+
     public function getContainerExtension()
     {
         if (null === $this->extension) {
@@ -19,5 +19,5 @@ class EvrinomaTestUtilsBundle extends Bundle
 
         return $this->extension;
     }
-//endregion Getters/Setters
+
 }

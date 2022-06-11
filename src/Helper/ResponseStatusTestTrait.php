@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait ResponseStatusTestTrait
 {
-//region SECTION: Protected
+
     protected function testResponseStatusCreated(): void
     {
         Assert::assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
@@ -38,6 +38,6 @@ trait ResponseStatusTestTrait
     {
         Assert::assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
     }
-//endregion Protected
+
 
 }

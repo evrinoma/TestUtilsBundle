@@ -6,18 +6,16 @@ use Evrinoma\TestUtilsBundle\Action\ActionTestInterface;
 
 trait ApiControllerTestTrait
 {
-//region SECTION: Fields
-    protected ActionTestInterface $actionService;
-//endregion Fields
 
-//region SECTION: Protected
+    protected ActionTestInterface $actionService;
+
+
     /**
      * @param ActionTestInterface $actionService
      */
     abstract protected function setActionService(ActionTestInterface $actionService): void;
-//endregion Protected
 
-//region SECTION: Public
+
     public function testPost(): void
     {
         $this->actionService->actionPost();
@@ -82,5 +80,4 @@ trait ApiControllerTestTrait
     {
         $this->actionService->actionGetNotFound();
     }
-//endregion Public
 }

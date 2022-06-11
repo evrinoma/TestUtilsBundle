@@ -6,10 +6,8 @@ use Symfony\Component\HttpKernel\Kernel;
 
 abstract class AbstractSymfony
 {
-//region SECTION: Protected
-//endregion Protected
 
-//region SECTION: Public
+
     /**
      *  return  true if symfony version more or equal 5.3
      */
@@ -22,5 +20,4 @@ abstract class AbstractSymfony
 
         return false;
     }
-//endregion Public
 }

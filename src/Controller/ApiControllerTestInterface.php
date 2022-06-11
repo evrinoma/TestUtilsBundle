@@ -4,7 +4,7 @@ namespace Evrinoma\TestUtilsBundle\Controller;
 
 interface ApiControllerTestInterface
 {
-//region SECTION: Public
+
 
     public function testGet(): void;
 
@@ -31,5 +31,4 @@ interface ApiControllerTestInterface
     public function testPostDuplicate(): void;
 
     public function testPostUnprocessable(): void;
-//endregion Public
 }

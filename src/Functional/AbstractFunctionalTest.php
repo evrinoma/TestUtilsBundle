@@ -13,7 +13,7 @@ abstract class AbstractFunctionalTest extends AbstractWebCaseTest implements Api
 {
     use ApiControllerTestTrait;
     protected string $actionServiceName = '';
-//region SECTION: Protected
+
     /**
      * @param ContainerInterface $container
      *
@@ -38,5 +38,5 @@ abstract class AbstractFunctionalTest extends AbstractWebCaseTest implements Api
     {
         $this->actionService = $actionService;
     }
-//endregion Protected
+
 }
