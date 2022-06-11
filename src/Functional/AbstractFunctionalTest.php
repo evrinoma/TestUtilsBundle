@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\TestUtilsBundle\Functional;
 
 use Evrinoma\TestUtilsBundle\Action\ActionTestInterface;
@@ -24,7 +35,7 @@ abstract class AbstractFunctionalTest extends AbstractWebCaseTest implements Api
     protected function setUp(): void
     {
         parent::setUp();
-        $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;;
+        $container     = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
         $actionService = $this->getActionService($container);
         $actionService->setClient($this->client);
         $actionService->setUrl();
@@ -38,5 +49,4 @@ abstract class AbstractFunctionalTest extends AbstractWebCaseTest implements Api
     {
         $this->actionService = $actionService;
     }
-
 }

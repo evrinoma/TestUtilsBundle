@@ -1,20 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\TestUtilsBundle\Controller;
 
 use Evrinoma\TestUtilsBundle\Action\ActionTestInterface;
 
 trait ApiControllerTestTrait
 {
-
     protected ActionTestInterface $actionService;
-
 
     /**
      * @param ActionTestInterface $actionService
      */
     abstract protected function setActionService(ActionTestInterface $actionService): void;
-
 
     public function testPost(): void
     {

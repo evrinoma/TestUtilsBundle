@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Evrinoma\TestUtilsBundle\Helper;
 
@@ -8,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait ResponseStatusTestTrait
 {
-
     protected function testResponseStatusCreated(): void
     {
         Assert::assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
@@ -38,6 +47,4 @@ trait ResponseStatusTestTrait
     {
         Assert::assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
     }
-
-
 }

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\TestUtilsBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,7 +22,7 @@ abstract class AbstractFixture extends Fixture
 
     protected static string $class = '';
 
-    protected static string $splitter =  '_';
+    protected static string $splitter = '_';
 
     public static function getReferenceName(): string
     {
@@ -19,7 +30,7 @@ abstract class AbstractFixture extends Fixture
     }
 
     /**
-     * Load data fixtures with the passed EntityManager
+     * Load data fixtures with the passed EntityManager.
      *
      * @param ObjectManager $manager
      */
@@ -30,5 +41,5 @@ abstract class AbstractFixture extends Fixture
         $manager->flush();
     }
 
-    abstract protected function create(ObjectManager $manager):self;
+    abstract protected function create(ObjectManager $manager): self;
 }

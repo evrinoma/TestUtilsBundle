@@ -1,12 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\TestUtilsBundle\Browser;
 
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
 trait ApiBrowserTestTrait
 {
-
     /**
      * @var AbstractBrowser|null
      */
@@ -22,12 +32,10 @@ trait ApiBrowserTestTrait
 
     protected ?string $postUrl = null;
 
-
     /**
      * @param AbstractBrowser|null $client
      */
     abstract public function setClient(?AbstractBrowser $client): void;
-
 
     public function queryPost(array $query): array
     {
@@ -72,7 +80,6 @@ trait ApiBrowserTestTrait
             $this->client->request('GET', $this->getUrl, $query);
         } else {
             throw new \HttpUrlException();
-
         }
 
         return $this->toResponse();
@@ -95,7 +102,6 @@ trait ApiBrowserTestTrait
         return json_decode($this->client->getResponse()->getContent(), true);
     }
 
-
     public function setUrl(): void
     {
         $this->postUrl     = static::API_POST;
@@ -104,5 +110,4 @@ trait ApiBrowserTestTrait
         $this->deleteUrl   = static::API_DELETE;
         $this->criteriaUrl = static::API_CRITERIA;
     }
-
 }

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\TestUtilsBundle\Web;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
@@ -16,7 +27,6 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
  */
 abstract class AbstractWebCaseTest extends WebTestCase
 {
-
     /**
      * @var AbstractBrowser|null
      */
@@ -26,15 +36,14 @@ abstract class AbstractWebCaseTest extends WebTestCase
      */
     protected EntityManagerInterface $entityManager;
 
-
     protected function createAuthenticatedClient()
     {
-        if ($this->client){
+        if ($this->client) {
             return $this->client;
         }
 
         if (static::$booted) {
-            $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;;
+            $container    = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
             $this->client = $container->get('test.client');
         } else {
             $this->client = static::createClient();
@@ -54,7 +63,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
     {
         $this->client = $this->createAuthenticatedClient();
 
-        $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;;
+        $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
 
         $this->entityManager = $container->get('doctrine')->getManager();
 
@@ -67,13 +76,12 @@ abstract class AbstractWebCaseTest extends WebTestCase
         $this->loadFixtures($loader);
     }
 
-
     private function loadFixtures(ContainerAwareLoader $loader): void
     {
         $groups = static::getFixtures();
-        if (count($groups)) {
+        if (\count($groups)) {
             $fixtures = $loader->getFixtures($groups);
-            if (count($fixtures)) {
+            if (\count($fixtures)) {
                 $purger   = new ORMPurger($this->entityManager);
                 $executor = new ORMExecutor($this->entityManager, $purger);
                 $executor->execute($fixtures);
@@ -98,7 +106,5 @@ abstract class AbstractWebCaseTest extends WebTestCase
         $purger->purge();
     }
 
-
     abstract public static function getFixtures(): array;
-
 }
