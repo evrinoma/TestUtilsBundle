@@ -43,7 +43,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
         }
 
         if (static::$booted) {
-            $container    = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
+            $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
             $this->client = $container->get('test.client');
         } else {
             $this->client = static::createClient();
@@ -82,7 +82,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
         if (\count($groups)) {
             $fixtures = $loader->getFixtures($groups);
             if (\count($fixtures)) {
-                $purger   = new ORMPurger($this->entityManager);
+                $purger = new ORMPurger($this->entityManager);
                 $executor = new ORMExecutor($this->entityManager, $purger);
                 $executor->execute($fixtures);
             }
@@ -92,7 +92,7 @@ abstract class AbstractWebCaseTest extends WebTestCase
     private function dropSchema(&$metadata = []): SchemaTool
     {
         $schemaTool = new SchemaTool($this->entityManager);
-        $metadata   = $this->entityManager->getMetadataFactory()->getAllMetadata();
+        $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
 
         $schemaTool->dropSchema($metadata);
 

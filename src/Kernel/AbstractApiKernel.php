@@ -24,11 +24,11 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 abstract class AbstractApiKernel extends Kernel
 {
-    protected string $rootDir      = __DIR__;
+    protected string $rootDir = __DIR__;
     protected string $bundlePrefix = '';
     private array    $bundleConfig = ['doctrine.yaml', 'fos_rest.yaml', 'framework.yaml', 'jms_serializer.yaml'];
-    private ?string  $cacheDir     = null;
-    private ?string  $logDir       = null;
+    private ?string  $cacheDir = null;
+    private ?string  $logDir = null;
 
     protected function build(ContainerBuilder $container)
     {

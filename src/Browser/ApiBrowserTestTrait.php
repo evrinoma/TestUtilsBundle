@@ -104,10 +104,10 @@ trait ApiBrowserTestTrait
 
     public function setUrl(): void
     {
-        $this->postUrl     = static::API_POST;
-        $this->getUrl      = static::API_GET;
-        $this->putUrl      = static::API_PUT;
-        $this->deleteUrl   = static::API_DELETE;
+        $this->postUrl = static::API_POST;
+        $this->getUrl = static::API_GET;
+        $this->putUrl = static::API_PUT;
+        $this->deleteUrl = static::API_DELETE;
         $this->criteriaUrl = static::API_CRITERIA;
     }
 }

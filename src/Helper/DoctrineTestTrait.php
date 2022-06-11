@@ -56,7 +56,7 @@ trait DoctrineTestTrait
 
             public function __construct(string $id, string $class)
             {
-                $this->id    = $id;
+                $this->id = $id;
                 $this->class = $class;
             }
 

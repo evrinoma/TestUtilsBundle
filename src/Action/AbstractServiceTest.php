@@ -24,11 +24,11 @@ abstract class AbstractServiceTest implements ActionTestInterface
     use ApiMethodTestTrait;
     use ResponseStatusTestTrait;
 
-    protected const API_GET      = '';
+    protected const API_GET = '';
     protected const API_CRITERIA = '';
-    protected const API_DELETE   = '';
-    protected const API_PUT      = '';
-    protected const API_POST     = '';
+    protected const API_DELETE = '';
+    protected const API_PUT = '';
+    protected const API_POST = '';
     protected static array $default = [];
 
     public function __construct()

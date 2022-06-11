@@ -35,7 +35,7 @@ abstract class AbstractFunctionalTest extends AbstractWebCaseTest implements Api
     protected function setUp(): void
     {
         parent::setUp();
-        $container     = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
+        $container = AbstractSymfony::checkVersion() ? $this->getContainer() : static::$container;
         $actionService = $this->getActionService($container);
         $actionService->setClient($this->client);
         $actionService->setUrl();
