@@ -41,5 +41,15 @@ abstract class AbstractFixture extends Fixture
         $manager->flush();
     }
 
+    public function getEntity()
+    {
+        return new static::$class();
+    }
+
+    protected function getData(): array
+    {
+        return static::$data;
+    }
+
     abstract protected function create(ObjectManager $manager): self;
 }
