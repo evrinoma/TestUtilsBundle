@@ -47,4 +47,9 @@ trait ResponseStatusTestTrait
     {
         Assert::assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
     }
+
+    protected function testResponseStatusBadRequest(): void
+    {
+        Assert::assertEquals(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+    }
 }
